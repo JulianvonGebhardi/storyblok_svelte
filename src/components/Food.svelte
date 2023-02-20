@@ -1,25 +1,31 @@
 <script>
-	import ArticleCard from './ArticleCard.svelte';
+	// import ArticleCard from './ArticleCard.svelte';
+
 	import { onMount } from 'svelte';
 	import { useStoryblokApi } from '@storyblok/svelte';
+
 	export let blok;
-	let articles = [];
+	// let articles = [];
+
 	onMount(async () => {
 		const storyblokApi = useStoryblokApi();
-		const { data } = await storyblokApi.get('cdn/stories', {
-			version: 'draft',
-			starts_with: 'blog',
-			is_startpage: false
+		const { data } = await storyblokApi.get('cdn/stories/food', {
+			version: 'draft'
+			// starts_with: 'blog',
+			// is_startpage: false
 		});
-		articles = data.stories;
+		story = data.content;
 	});
 </script>
 
 <div class="py-24">
 	<h2 class="text-6xl text-[#50b0ae] font-bold text-center mb-12">{blok.title}</h2>
 	<div class="container mx-auto grid md:grid-cols-3 gap-12 my-12 place-items-start">
-		{#each articles as article}
+		<h4>{blok.description}</h4> <br>
+		<p>From the Food Component</p>
+		<!-- {#each articles as article}
 			<ArticleCard article={article.content} slug={article.full_slug} />
-		{/each}
+		{/each} What-->
+		
 	</div>
 </div>
